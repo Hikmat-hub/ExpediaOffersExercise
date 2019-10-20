@@ -1,3 +1,4 @@
 expedia:
-    service:
-      offersUrl: https://offersvc.expedia.com/offers/v2/getOffers
+  service:
+    offersUrl: https://offersvc.expedia.com/offers/v2/getOffers
+

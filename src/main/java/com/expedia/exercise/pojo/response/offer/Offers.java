@@ -22,6 +22,6 @@ public class Offers {
      * (Required)
      * 
      */
-    public List<Hotel> hotel = null;
+    public List<Hotel> Hotel = null;
 
 }

@@ -11,7 +11,7 @@ import lombok.Data;
  * 
  */
 @Data
-public class OfferResponse {
+public class OfferExpediaResponse {
 
     /**
      * The Offerinfo Schema
