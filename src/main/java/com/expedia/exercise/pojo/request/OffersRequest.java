@@ -4,7 +4,10 @@ import com.expedia.exercise.validator.constraint.MinMaxDateConstraint;
 import com.expedia.exercise.validator.constraint.PresentFutureDateConstraint;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Date;
 import java.util.List;
 
@@ -17,17 +20,32 @@ public class OffersRequest {
 
     private String destinationName;
     private List<String> regionIds;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @PresentFutureDateConstraint(message = "Invalid Min date value, It should equal or grater than current date.")
     private Date minTripStartDate;
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @PresentFutureDateConstraint(message = "Invalid Max date value, It should equal or grater than current date.")
     private Date maxTripStartDate;
+    @Min(1)
     private Integer lengthOfStay;
-    private Float maxStarRating;
-    private Float minStarRating;
-    private Float maxTotalRate;
-    private Float minTotalRate;
-    private Float maxGuestRating;
-    private Float minGuestRating;
+    @Max(5)
+    @Min(0)
+    private Integer maxStarRating;
+    @Max(5)
+    @Min(0)
+    private Integer minStarRating;
+    @Max(5)
+    @Min(0)
+    private Integer maxTotalRate;
+    @Max(5)
+    @Min(0)
+    private Integer minTotalRate;
+    @Max(5)
+    @Min(0)
+    private Integer maxGuestRating;
+    @Max(5)
+    @Min(0)
+    private Integer minGuestRating;
 
     @JsonGetter("regionIds")
     public String getRegionIds() {
