@@ -31,7 +31,7 @@
                                 <p class="card-text"><span class="label">${listValue.offerDateRange.travelStartDate[1]}/${listValue.offerDateRange.travelStartDate[2]} - ${listValue.offerDateRange.travelEndDate[1]}/${listValue.offerDateRange.travelEndDate[2]}</p>
                                 <p class="card-text"><span class="label">Price:</span> ${listValue.hotelPricingInfo.displayPriceValue} ${listValue.hotelPricingInfo.currency}</p>
                                 <p class="card-text"><span class="label">Save:</span> ${listValue.hotelPricingInfo.percentSavings}%</p>
-                                <a href="${listValue.hotelUrls.hotelInfositeUrl}%" class="btn btn-primary">Check on Expedia Site</a>
+                                <a href="${listValue.hotelUrls.hotelInfositeUrl}" class="btn btn-primary">Check on Expedia Site</a>
                             </div>
                         </div>
                     </div>
