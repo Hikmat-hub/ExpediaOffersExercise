@@ -43,7 +43,9 @@ public class OffersDaoImpl implements IOffersDao {
         }
 
         try {
+            long start = System.currentTimeMillis();
             final HttpResponse response = executeOfferRequest(offerServiceUri);
+            LOGGER.info("******************It took: " + (System.currentTimeMillis() - start));
             final int httpResponseCode = response.getStatusLine().getStatusCode();
             final String body = EntityUtils.toString(response.getEntity());
             if(httpResponseCode != 200) {
@@ -78,14 +80,25 @@ public class OffersDaoImpl implements IOffersDao {
      * @throws IOException
      */
     private HttpResponse executeOfferRequest(URI offerServiceUri) throws IOException {
+        int DEFAULT_TIMEOUT = 5000;
+//        RequestConfig requestConfig = RequestConfig.custom()
+//                .setConnectTimeout(DEFAULT_TIMEOUT)
+//                .setConnectionRequestTimeout(DEFAULT_TIMEOUT)
+//                .setSocketTimeout(DEFAULT_TIMEOUT)
+//                .build();
+
         HttpClient httpClient = HttpClients.custom()
                 .setDefaultRequestConfig(RequestConfig.custom()
-                        .setCookieSpec(CookieSpecs.STANDARD).build())
-                .setConnectionTimeToLive(3, TimeUnit.SECONDS)
+                        .setCookieSpec(CookieSpecs.STANDARD)
+                                .setConnectTimeout(DEFAULT_TIMEOUT)
+                                .setConnectionRequestTimeout(DEFAULT_TIMEOUT)
+                                .setSocketTimeout(DEFAULT_TIMEOUT)
+                        .build())
+//                .setConnectionTimeToLive(3, TimeUnit.SECONDS)
                 .build();
         HttpGet httpGet = new HttpGet(offerServiceUri);
         addBrowserHeaders(httpGet);
-        Arrays.stream(httpGet.getAllHeaders()).forEach(header -> LOGGER.warn(header.getName()+"--> " + header.getValue()));
+        Arrays.stream(httpGet.getAllHeaders()).forEach(header -> LOGGER.info(header.getName()+"--> " + header.getValue()));
         return httpClient.execute(httpGet);
     }
 
@@ -102,8 +115,6 @@ public class OffersDaoImpl implements IOffersDao {
         httpGet.setHeader(HttpHeaders.CONNECTION, "keep-alive");
         httpGet.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
         httpGet.setHeader(HttpHeaders.ACCEPT_CHARSET, "UTF-8");
-
-
     }
 
     /**
