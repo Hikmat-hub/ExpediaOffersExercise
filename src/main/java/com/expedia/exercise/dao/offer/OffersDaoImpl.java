@@ -81,7 +81,7 @@ public class OffersDaoImpl implements IOffersDao {
     private HttpResponse executeOfferRequest(URI offerServiceUri) throws IOException {
         HttpClient httpClient = new DecompressingHttpClient(new DefaultHttpClient());
         HttpGet httpGet = new HttpGet(offerServiceUri);
-//        addBrowserHeaders(httpGet);
+        addBrowserHeaders(httpGet);
         Arrays.stream(httpGet.getAllHeaders()).forEach(header -> LOGGER.warn(header.getName()+"--> " + header.getValue()));
         return httpClient.execute(httpGet);
     }
