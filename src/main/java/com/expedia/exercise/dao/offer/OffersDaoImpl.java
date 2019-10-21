@@ -4,12 +4,11 @@ import com.expedia.exercise.config.ExpediaServiceConfig;
 import com.expedia.exercise.pojo.request.OffersRequest;
 import com.expedia.exercise.pojo.response.offer.OfferExpediaResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DecompressingHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -81,6 +80,9 @@ public class OffersDaoImpl implements IOffersDao {
     private HttpResponse executeOfferRequest(URI offerServiceUri) throws IOException {
         HttpClient httpClient = new DecompressingHttpClient(new DefaultHttpClient());
         HttpGet httpGet = new HttpGet(offerServiceUri);
+        httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,
+                CookiePolicy.NETSCAPE);
+
         addBrowserHeaders(httpGet);
         Arrays.stream(httpGet.getAllHeaders()).forEach(header -> LOGGER.warn(header.getName()+"--> " + header.getValue()));
         return httpClient.execute(httpGet);
@@ -97,6 +99,7 @@ public class OffersDaoImpl implements IOffersDao {
         httpGet.setHeader(HttpHeaders.ACCEPT_LANGUAGE, "en-US,en;q=0.9");
         httpGet.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
         httpGet.setHeader(HttpHeaders.CONNECTION, "keep-alive");
+        httpGet.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
     }
 
     /**
