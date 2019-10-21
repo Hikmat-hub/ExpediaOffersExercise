@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 public @interface MinMaxDateConstraint {
     String minDateParameterName();
     String maxDateParameterName();
-    String message() default "Max date should be bigger than Min Date value";
+    String message() default "Max date should be bigger than Min Date value.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PresentFutureDateConstraint {
-    String message() default "Invalid date value, It should equal or grater than current date.";
+    String message() default "{PresentFutureDateConstraint}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -23,11 +23,11 @@ public class OffersRequest {
     private List<String> regionIds;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @PresentFutureDateConstraint(message = "Invalid Min date value, It should equal or grater than current date.")
+    @PresentFutureDateConstraint(message = "{minTripStartDate}")
     private Date minTripStartDate;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @PresentFutureDateConstraint(message = "Invalid Max date value, It should equal or grater than current date.")
+    @PresentFutureDateConstraint(message = "{maxTripStartDate}")
     private Date maxTripStartDate;
     @Min(1)
     private Integer lengthOfStay;

@@ -79,6 +79,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                             <button type="submit" class="btn btn-danger wrn-btn">Search</button>
                         </div>
+                        <form:errors path="" cssClass="error" />
                     </div>
                 </div>
             </div>
