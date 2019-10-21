@@ -23,6 +23,7 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -80,7 +81,7 @@ public class OffersDaoImpl implements IOffersDao {
         HttpClient httpClient = HttpClients.custom()
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setCookieSpec(CookieSpecs.STANDARD).build())
-                .setDefaultHeaders(Arrays.asList())
+                .setConnectionTimeToLive(3, TimeUnit.SECONDS)
                 .build();
         HttpGet httpGet = new HttpGet(offerServiceUri);
         addBrowserHeaders(httpGet);
