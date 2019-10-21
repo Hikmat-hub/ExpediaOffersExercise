@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class OffersDaoImpl implements IOffersDao {
             final int httpResponseCode = response.getStatusLine().getStatusCode();
             final String body = EntityUtils.toString(response.getEntity());
             if(httpResponseCode != 200) {
-                LOGGER.error(String.format("Not success HTTP response %s from offer url: %s, with body:\n%s", httpResponseCode, expediaServiceConfig.getOffersUrl(), body));
+                LOGGER.error(String.format("Not success HTTP response %s from offer url: %s.", httpResponseCode, expediaServiceConfig.getOffersUrl()));
                 return Optional.empty();
             }
             return getOfferResponse(body);
@@ -80,7 +81,8 @@ public class OffersDaoImpl implements IOffersDao {
     private HttpResponse executeOfferRequest(URI offerServiceUri) throws IOException {
         HttpClient httpClient = new DecompressingHttpClient(new DefaultHttpClient());
         HttpGet httpGet = new HttpGet(offerServiceUri);
-        addBrowserHeaders(httpGet);
+//        addBrowserHeaders(httpGet);
+        Arrays.stream(httpGet.getAllHeaders()).forEach(header -> LOGGER.warn(header.getName()+"--> " + header.getValue()));
         return httpClient.execute(httpGet);
     }
 
