@@ -19,6 +19,7 @@ public class Application {
     private ExpediaServiceConfig expediaServiceConfig;
 
     public static void main(String[] args) {
+        System.setProperty("server.connection-timeout", "60000");
         SpringApplication.run(Application.class, args);
     }
 
