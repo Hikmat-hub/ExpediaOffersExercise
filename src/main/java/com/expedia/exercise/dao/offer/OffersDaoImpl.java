@@ -23,7 +23,6 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -45,7 +44,6 @@ public class OffersDaoImpl implements IOffersDao {
         try {
             long start = System.currentTimeMillis();
             final HttpResponse response = executeOfferRequest(offerServiceUri);
-            LOGGER.info("******************It took: " + (System.currentTimeMillis() - start));
             final int httpResponseCode = response.getStatusLine().getStatusCode();
             final String body = EntityUtils.toString(response.getEntity());
             if(httpResponseCode != 200) {
@@ -80,21 +78,10 @@ public class OffersDaoImpl implements IOffersDao {
      * @throws IOException
      */
     private HttpResponse executeOfferRequest(URI offerServiceUri) throws IOException {
-        int DEFAULT_TIMEOUT = 5000;
-//        RequestConfig requestConfig = RequestConfig.custom()
-//                .setConnectTimeout(DEFAULT_TIMEOUT)
-//                .setConnectionRequestTimeout(DEFAULT_TIMEOUT)
-//                .setSocketTimeout(DEFAULT_TIMEOUT)
-//                .build();
-
         HttpClient httpClient = HttpClients.custom()
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setCookieSpec(CookieSpecs.STANDARD)
-                                .setConnectTimeout(DEFAULT_TIMEOUT)
-                                .setConnectionRequestTimeout(DEFAULT_TIMEOUT)
-                                .setSocketTimeout(DEFAULT_TIMEOUT)
                         .build())
-//                .setConnectionTimeToLive(3, TimeUnit.SECONDS)
                 .build();
         HttpGet httpGet = new HttpGet(offerServiceUri);
         addBrowserHeaders(httpGet);
