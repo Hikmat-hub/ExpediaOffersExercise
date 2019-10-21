@@ -32,7 +32,7 @@ public class MinMaxDateValidator implements ConstraintValidator<MinMaxDateConstr
         }
 
         final Calendar maxDateCalendar = CalendarUtil.getClearTimeCalendar(maxDateValue);
-        final Calendar minDateCalendar = CalendarUtil.getClearTimeCalendar(maxDateValue);
+        final Calendar minDateCalendar = CalendarUtil.getClearTimeCalendar(minDateValue);
 
         return minDateCalendar.before(maxDateCalendar);
     }

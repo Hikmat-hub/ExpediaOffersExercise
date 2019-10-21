@@ -26,7 +26,7 @@ final class OfferParamsGenerator {
         final List<NameValuePair> nameValuePairs = new ArrayList<>();
         final ObjectMapper mapper = new ObjectMapper();
         nameValuePairs.addAll(getDefaultParameters());
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         // Convert POJO to Map
         final Map<String, Object> map =
                 mapper.convertValue(offersRequest, new TypeReference<Object>() {});

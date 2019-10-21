@@ -2,6 +2,7 @@ package com.expedia.exercise.pojo.request;
 
 import com.expedia.exercise.validator.constraint.MinMaxDateConstraint;
 import com.expedia.exercise.validator.constraint.PresentFutureDateConstraint;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,10 +21,12 @@ public class OffersRequest {
 
     private String destinationName;
     private List<String> regionIds;
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @PresentFutureDateConstraint(message = "Invalid Min date value, It should equal or grater than current date.")
     private Date minTripStartDate;
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @PresentFutureDateConstraint(message = "Invalid Max date value, It should equal or grater than current date.")
     private Date maxTripStartDate;
     @Min(1)

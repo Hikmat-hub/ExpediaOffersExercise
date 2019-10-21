@@ -40,3 +40,10 @@
     top: .3em;
 }
 
+.result-info{
+    margin-left: 45%;
+}
+
+span.label{
+    font-weight: normal;
+}

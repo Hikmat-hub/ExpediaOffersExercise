@@ -15,6 +15,20 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                             <label class="form-group has-float-label">
+                                <form:input path="minTripStartDate" id="datepicker-date1" readonly="true" class="datepicker-date form-control search-slt" placeholder="Min Trip Start Date" />
+                                <span>Min Trip Start Date</span>
+                            </label>
+                            <form:errors path="minTripStartDate" cssClass="error" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <label class="form-group has-float-label">
+                                <form:input path="maxTripStartDate" id="datepicker-date2" readonly="true" class="datepicker-date form-control search-slt" placeholder="Max Trip Start Date" />
+                                <span>Max Trip Start Date</span>
+                            </label>
+                            <form:errors path="maxTripStartDate" cssClass="error" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <label class="form-group has-float-label">
                                 <form:input path="lengthOfStay" type="number" class="form-control search-slt" placeholder="Length Of Stay" min="1" />
                                 <span>Length Of Stay</span>
                             </label>
